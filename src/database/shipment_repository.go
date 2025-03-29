@@ -9,7 +9,7 @@ import (
 )
 
 type ShipmentRepository struct {
-	db *gorm.DB
+	DB *gorm.DB
 }
 
 func (sr *ShipmentRepository) GetAllShipments(ctx *gin.Context) {
