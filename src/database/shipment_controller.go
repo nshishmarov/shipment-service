@@ -8,11 +8,11 @@ import (
 	"gorm.io/gorm"
 )
 
-type ShipmentRepository struct {
+type ShipmentController struct {
 	DB *gorm.DB
 }
 
-func (sr *ShipmentRepository) GetAllShipments(ctx *gin.Context) {
+func (sr *ShipmentController) GetAllShipments(ctx *gin.Context) {
 	var shipments = []dto.Shipment{
 		{ShipmentName: "test", ShipmentDate: "test"},
 	}

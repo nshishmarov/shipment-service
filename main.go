@@ -56,5 +56,6 @@ func main() {
 	})
 	server.Run(serviceHost + ":" + servicePort)
 
-	controller.NewShipmentController(db)
+	sc := controller.NewShipmentController(db)
+	sc.ShipmentRoute(router)
 }
