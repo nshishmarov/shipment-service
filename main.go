@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"service/src/api/controller"
+	"service/src/api"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -56,6 +56,6 @@ func main() {
 	})
 	server.Run(serviceHost + ":" + servicePort)
 
-	sc := controller.NewShipmentController(db)
+	sc := api.NewShipmentRouter(db)
 	sc.ShipmentRoute(router)
 }

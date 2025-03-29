@@ -1,4 +1,4 @@
-package controller
+package api
 
 import (
 	"service/src/database"
@@ -11,7 +11,7 @@ type ShipmentRouter struct {
 	shipmentController *database.ShipmentController
 }
 
-func NewShipmentController(db *gorm.DB) ShipmentRouter {
+func NewShipmentRouter(db *gorm.DB) ShipmentRouter {
 	sr := database.ShipmentController{DB: db}
 	return ShipmentRouter{&sr}
 }
