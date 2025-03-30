@@ -20,7 +20,7 @@ func init() {
 	// Loading Environments
 	err := godotenv.Load("app.env")
 	if err != nil {
-		fmt.Println("Error loading environments")
+		panic("Error loading environments")
 	}
 	server = gin.Default()
 }
@@ -43,8 +43,7 @@ func main() {
 	// Connect to DB
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		fmt.Println("Failed to connect to DB")
-		return
+		panic("Failed to connect to DB")
 	}
 	fmt.Println("Connected to DB")
 
