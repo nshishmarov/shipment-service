@@ -19,9 +19,8 @@ func (c *ShipmentController) Migrate() {
 }
 
 func (sr *ShipmentController) GetAllShipments(ctx *gin.Context) {
-	var shipments = []dto.Shipment{
-		{ShipmentName: "test", ShipmentDate: "test"},
-	}
+	var shipment model.ShipmentEntity
+	var shipments = sr.DB.Find(&shipment)
 	ctx.IndentedJSON(http.StatusOK, shipments)
 }
 

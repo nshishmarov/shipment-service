@@ -59,8 +59,8 @@ func main() {
 		msg := "Service started!"
 		ctx.JSON(http.StatusOK, gin.H{"status":"success", "content":&msg})
 	})
-	sr := api.NewShipmentRouter(db)
-	sr.ShipmentRoute(router)
-	sr.CreateShipment(router)
+	sr := api.NewShipmentRouter(db, router)
+	sr.AddGetRoute()
+	sr.AddPostRoute()
 	server.Run(serviceHost + ":" + servicePort)
 }

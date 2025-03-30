@@ -9,19 +9,19 @@ import (
 
 type ShipmentRouter struct {
 	shipmentController *database.ShipmentController
+	rg *routing.RouterGroup
 }
 
-func NewShipmentRouter(db *gorm.DB) ShipmentRouter {
-	sr := database.ShipmentController{DB: db}
-	return ShipmentRouter{&sr}
-}
-
-func (c *ShipmentRouter) ShipmentRoute(rg *routing.RouterGroup)  {
-	router := rg.Group("/shipments")
-	router.GET("/get", c.shipmentController.GetAllShipments)
-}
-
-func (c *ShipmentRouter) CreateShipment(rg *routing.RouterGroup) {
+func NewShipmentRouter(db *gorm.DB, rg *routing.RouterGroup) ShipmentRouter {
 	router := rg.Group("/shipment")
-	router.POST("/", c.shipmentController.CreateShipment)
+	sr := &database.ShipmentController{DB: db}
+	return ShipmentRouter{sr, router}
+}
+
+func (c *ShipmentRouter) AddGetRoute()  {
+	c.rg.GET("/all", c.shipmentController.GetAllShipments)
+}
+
+func (c *ShipmentRouter) AddPostRoute() {
+	c.rg.POST("/", c.shipmentController.CreateShipment)
 }

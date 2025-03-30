@@ -7,7 +7,3 @@ import (
 type ShipmentService struct {
 	db *gorm.DB
 }
-
-func (s *ShipmentService) getAllShipments() {
-	
-}
