@@ -20,3 +20,8 @@ func (c *ShipmentRouter) ShipmentRoute(rg *routing.RouterGroup)  {
 	router := rg.Group("/shipments")
 	router.GET("/get", c.shipmentController.GetAllShipments)
 }
+
+func (c *ShipmentRouter) CreateShipment(rg *routing.RouterGroup) {
+	router := rg.Group("/shipment")
+	router.POST("/", c.shipmentController.CreateShipment)
+}

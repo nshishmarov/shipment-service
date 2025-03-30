@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"service/src/api"
+	"service/src/model"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -47,13 +48,19 @@ func main() {
 	}
 	fmt.Println("Connected to DB")
 
+	// AutoMigrate Models
+	// sc := database.ShipmentController{}
+	// sc.Migrate()
+	db.AutoMigrate(&model.ShipmentEntity{})
+
 	// Router Setup
 	router := server.Group("/api")
 	router.GET("/health-check", func(ctx *gin.Context) {
 		msg := "Service started!"
 		ctx.JSON(http.StatusOK, gin.H{"status":"success", "content":&msg})
 	})
-	sc := api.NewShipmentRouter(db)
-	sc.ShipmentRoute(router)
+	sr := api.NewShipmentRouter(db)
+	sr.ShipmentRoute(router)
+	sr.CreateShipment(router)
 	server.Run(serviceHost + ":" + servicePort)
 }
